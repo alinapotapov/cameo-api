@@ -1,0 +1,30 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: sthings-frontend
+  name: sthings-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sthings-frontend
+  template:
+    metadata:
+      labels:
+        app: sthings-frontend
+    spec:
+      containers:
+      - image: scr.tiab.labda.sva.de/sthings-frontend/sthings-frontend:0.0.10
+        env:
+        - name: VUE_APP_API_URL
+          value: "https://name-generator.teasle.sthings.tiab.ssc.sva.de"
+        resources:
+          limits:
+            cpu: 100m
+            memory: 100Mi
+          requests:
+            cpu: 50m
+            memory: 50Mi
+        name: sthings-frontend

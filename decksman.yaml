@@ -1,0 +1,4 @@
+general:
+  major: 0
+  minor: 0
+  patch: 10 #replace patch_version:[0-9]+
