@@ -15,10 +15,7 @@
           </div>
           <el-input v-model="input" inputmode="{{ input }}" />
           <div class="modal-footer">
-            <el-tooltip
-              content="You can't use only digits, or _ , or name more than 16 symbols"
-              placement="top"
-            >
+            <el-tooltip content="You can't use only digits, or _ , or name more than 16 symbols" placement="top">
               <span>
                 <el-button
                   type="success"
@@ -37,13 +34,7 @@
     </div>
   </Transition>
   <el-row class="mb-4">
-    <el-button
-      class="devider"
-      @click="clickOnAllNamesButton"
-      type="primary"
-      plain
-      >All names</el-button
-    >
+    <el-button class="devider" @click="clickOnAllNamesButton" type="primary" plain>All names</el-button>
 
     <el-tooltip placement="top">
       <template #content> Choose the count of names</template>
@@ -61,39 +52,23 @@
   </el-row>
 
   <div class="table">
-    <el-table
-      :data="randomNamesList"
-      style="width: 40%"
-      v-show="isRandomNameButtonSelected"
-    >
+    <el-table :data="randomNamesList" style="width: 40%" v-show="isRandomNameButtonSelected">
       <el-table-column prop="name" label="Name" />
     </el-table>
   </div>
 
   <div class="table">
-    <el-table
-      :data="allNamesList"
-      style="width: 60%"
-      v-show="isAllNameButtonSelected"
-    >
+    <el-table :data="allNamesList" style="width: 50%" v-show="isAllNameButtonSelected">
       <el-table-column prop="name" label="Name" />
       <el-table-column fixed="right" width="120">
         <template #default="scope">
-          <el-button
-            @click.prevent="deleteNameFromList(scope.$index)"
-            type="primary"
-            :icon="Delete"
-          />
+          <el-button @click.prevent="deleteNameFromList(scope.$index)" type="primary" :icon="Delete" />
         </template>
       </el-table-column>
 
       <el-table-column fixed="right" width="120">
         <template #default="scope">
-          <el-button
-            @click.prevent="openAddModal('update', scope.$index)"
-            type="primary"
-            :icon="Edit"
-          />
+          <el-button @click.prevent="openAddModal('update', scope.$index)" type="primary" :icon="Edit" />
         </template>
       </el-table-column>
     </el-table>
@@ -116,13 +91,7 @@
 <script lang="ts" setup>
 import { onMounted, ref, watch } from "vue";
 import { Delete, Edit } from "@element-plus/icons-vue";
-import {
-  getAllNames,
-  deleteName,
-  createName,
-  updateName,
-  getName,
-} from "@/service/api";
+import { getAllNames, deleteName, createName, updateName, getName } from "@/service/api";
 import { onClickOutside } from "@vueuse/core";
 
 const input = ref("");
@@ -147,9 +116,7 @@ const inputValidation = (): boolean => {
 };
 
 const checkActionType = async (action: string, index: number) => {
-  action == "update"
-    ? updateName(allNamesList.value.at(index).name, input.value)
-    : addNameToList(input.value);
+  action == "update" ? updateName(allNamesList.value.at(index).name, input.value) : addNameToList(input.value);
   openModalWindow.value = false;
 
   allNamesList.value.at(index).name = input.value;
